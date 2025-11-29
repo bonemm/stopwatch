@@ -36,15 +36,16 @@ class ThemeService {
 
 final lightTheme = ThemeData(
   primarySwatch: Colors.teal,
+  primaryColor: Color(0xFF34454c),
   brightness: Brightness.light,
-  scaffoldBackgroundColor: Colors.teal,
-  // Define AppBar theme specifically
-  appBarTheme: AppBarTheme(backgroundColor: Colors.teal.shade100, foregroundColor: Colors.black),
+  scaffoldBackgroundColor: Color(0xFFb5decc),
+  appBarTheme: AppBarTheme(backgroundColor: Color(0xFFb5decc), foregroundColor: Colors.black),
 );
 
 final darkTheme = ThemeData(
   primarySwatch: Colors.deepPurple,
+  primaryColor: Colors.deepPurple.shade900,
   scaffoldBackgroundColor: Colors.black,
   brightness: Brightness.dark,
-  appBarTheme: AppBarTheme(backgroundColor: Colors.deepPurple.shade900, foregroundColor: Colors.white),
+  appBarTheme: AppBarTheme(backgroundColor: Colors.black, foregroundColor: Colors.white),
 );

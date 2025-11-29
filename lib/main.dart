@@ -7,17 +7,17 @@ import 'package:stopwatch/theme_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final themeService = await ThemeService.instance;
+  final controller = StopwatchController();
   var initTheme = themeService.initial;
   runApp(
-    MainApp(
-      initTheme: initTheme,
-    ),
+    MainApp(initTheme: initTheme, controller: controller),
   );
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key, required this.initTheme});
+  const MainApp({super.key, required this.initTheme, required this.controller});
   final ThemeData initTheme;
+  final StopwatchController controller;
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
@@ -25,7 +25,7 @@ class MainApp extends StatelessWidget {
       builder: (context, theme) => MaterialApp(
         theme: theme,
         debugShowCheckedModeBanner: false,
-        home: StopWatchScreen(controller: StopwatchController()),
+        home: StopWatchScreen(controller: controller),
       ),
     );
   }
