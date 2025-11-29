@@ -18,6 +18,25 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  flutter_native_splash: ^2.4.7
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/
+  # fonts:
+  #   - family: Arimo
+  #     fonts:
+  #       - asset: fonts/Arimo-Bold.ttf
+  #       - asset: fonts/Arimo-Regular.ttf
+  #       - asset: fonts/Arimo-SemiBold.ttf
+       
+
+flutter_native_splash:
+  color: "#b5decc" 
+  image: assets/stopwatch.png
+  android_12:
+    color: "#b5decc"
+    image: assets/stopwatch.png
+    
+  
