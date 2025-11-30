@@ -9,9 +9,7 @@ void main() async {
   final themeService = await ThemeService.instance;
   final controller = StopwatchController();
   var initTheme = themeService.initial;
-  runApp(
-    MainApp(initTheme: initTheme, controller: controller),
-  );
+  runApp(MainApp(initTheme: initTheme, controller: controller));
 }
 
 class MainApp extends StatelessWidget {

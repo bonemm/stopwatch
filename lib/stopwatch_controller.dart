@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 
 class StopwatchController with ChangeNotifier {
   final Stopwatch _stopwatch = Stopwatch();
+  final String _runTextStart = 'Tap to start';
+  final String _runTextPause = 'Tap to pause';
+
   Timer? _timer;
   String _elapsedTime = '00:00.00';
-  final String _appBarTextStart = 'Tap to start';
-  final String _appBarTextPause = 'Tap to pause';
 
   String get time => _elapsedTime;
-  String get appBarText => _stopwatch.isRunning ? _appBarTextPause : _appBarTextStart;
+  String get appBarText => _stopwatch.isRunning ? _runTextPause : _runTextStart;
 
   void startTimer() {
     _stopwatch.start();
@@ -35,6 +36,14 @@ class StopwatchController with ChangeNotifier {
   void _updateTimer() {
     _elapsedTime = _formatTime(_stopwatch.elapsedMilliseconds);
     notifyListeners();
+  }
+
+  void onScreenTap() {
+    if (_stopwatch.isRunning) {
+      stopTimer();
+    } else {
+      startTimer();
+    }
   }
 
   String _formatTime(int milliseconds) {

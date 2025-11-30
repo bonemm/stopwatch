@@ -14,22 +14,10 @@ class StopWatchScreen extends StatefulWidget {
 }
 
 class _StopWatchScreenState extends State<StopWatchScreen> {
-  bool isTimerOn = false;
-
   @override
   void initState() {
     super.initState();
     WakelockPlus.enable();
-  }
-
-  void _onTap() {
-    isTimerOn = !isTimerOn;
-
-    if (isTimerOn) {
-      widget.controller.startTimer();
-    } else {
-      widget.controller.stopTimer();
-    }
   }
 
   @override
@@ -44,7 +32,7 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
       extendBodyBehindAppBar: true,
       appBar: StopWatchAppBar(controller: widget.controller),
       body: GestureDetector(
-        onTap: _onTap,
+        onTap: widget.controller.onScreenTap,
         behavior: HitTestBehavior.opaque,
         child: Center(
           child: ListenableBuilder(
@@ -66,10 +54,12 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
                     child: Center(
                       child: SizedBox(
                         width: 200,
-                        child: Text(
-                          widget.controller.time,
-                          style: TextStyle(fontSize: 40),
-                          textAlign: TextAlign.center,
+                        child: FittedBox(
+                          child: Text(
+                            widget.controller.time,
+                            style: TextStyle(fontSize: 40),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                     ),
@@ -78,7 +68,11 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
                 SizedBox(height: 100),
                 Text(
                   widget.controller.appBarText,
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500, color: Theme.of(context).primaryColor),
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ],
             ),
@@ -101,7 +95,7 @@ class StopWatchAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: true,
         title: Text('Stopwatch'),
         titleSpacing: 0,
-        actionsPadding: EdgeInsets.only(right: 6.0),
+        actionsPadding: EdgeInsets.only(right: 4.0),
         leading: Padding(
           padding: const EdgeInsets.only(left: 6.0),
           child: ThemeSwitcher(

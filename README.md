@@ -1,4 +1,4 @@
-# Simple stopwatch.
+# Simple stopwatch
 
 A simple and minimalistic stopwatch app built with Flutter.
 
@@ -6,6 +6,7 @@ A simple and minimalistic stopwatch app built with Flutter.
 
  1. Dark and Light themes 
  2. Run by tap on the screen
+ 3. Disable screen sleep while app is open
 
 ## Screenshots
 <div align="center">
