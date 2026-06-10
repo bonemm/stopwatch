@@ -1,4 +1,3 @@
-import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:stopwatch/stopwatch_controller.dart';
 import 'package:stopwatch/theme_service.dart';
@@ -47,7 +46,7 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).colorScheme.primary,
                         width: 4, // Border thickness
                       ),
                     ),
@@ -57,7 +56,10 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
                         child: FittedBox(
                           child: Text(
                             widget.controller.time,
-                            style: TextStyle(fontSize: 40),
+                            style: TextStyle(
+                              fontSize: 40,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -71,7 +73,7 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w500,
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ],
@@ -90,34 +92,21 @@ class StopWatchAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ThemeSwitchingArea(
-      child: AppBar(
+    return AppBar(
         centerTitle: true,
         title: Text('Stopwatch'),
         titleSpacing: 0,
-        actionsPadding: EdgeInsets.only(right: 4.0),
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 6.0),
-          child: ThemeSwitcher(
-            builder: (context) {
-              return IconButton(
-                onPressed: () async {
-                  final themeSwitcher = ThemeSwitcher.of(context);
-                  final nextThemeName = ThemeModelInheritedNotifier.of(context).theme.brightness == Brightness.light
-                      ? 'dark'
-                      : 'light';
-                  var themeService = await ThemeService.instance;
-                  themeService.saveTheme(nextThemeName);
-                  themeSwitcher.changeTheme(theme: nextThemeName == 'light' ? lightTheme : darkTheme);
-                },
-                icon: Image.asset(
-                  'assets/clear-night.png',
-                  height: 35,
-                  width: 35,
-                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
-                ),
-              );
-            },
+        leadingWidth: 56,
+        leading: IconButton(
+          onPressed: () async {
+            final themeService = await ThemeService.instance;
+            themeService.toggle();
+          },
+          icon: Image.asset(
+            'assets/clear-night.png',
+            height: 35,
+            width: 35,
+            color: Theme.of(context).brightness == Brightness.dark ? Colors.white : lightAppBarColor,
           ),
         ),
         actions: [
@@ -127,12 +116,11 @@ class StopWatchAppBar extends StatelessWidget implements PreferredSizeWidget {
               'assets/undo.png',
               height: 35,
               width: 35,
-              color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
+              color: Theme.of(context).brightness == Brightness.dark ? Colors.white : lightAppBarColor,
             ),
           ),
         ],
-      ),
-    );
+      );
   }
 
   @override
